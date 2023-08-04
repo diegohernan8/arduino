@@ -31,8 +31,8 @@ String bt,btS;
 
 
 void setup(){
-  Serial.begin(115200);
-  Bluetooth.begin(38400);
+  Serial.begin(38400); 
+  Bluetooth.begin(38400); // ver velocidad configurada del modulo hc-05
   Bluetooth.setTimeout(10);
   servo1.attach(5,510,1200);  //ancho min y max exclusivo para  MG996R base
   servo2.attach(11,650,1400);  //ancho min y max exclusivo para  MG946R hombro1
@@ -59,7 +59,7 @@ void setup(){
   s6Ant=90;  //MUÑECA
   servo6.write(s6Ant);
   
-  s7Ant=60; //GRIPPER
+  s7Ant=60; //GRIPPER-garra-pinza
   servo7.write(s7Ant);
   
   delay(50);
@@ -73,7 +73,7 @@ void loop() {
         //////////////////////////// SERVO 1 - BASE /////////////////////////////////////////////////////////////////////////////////
         if(bt.startsWith("s1")){                // comprueba si la cadena comienza con "s1"
            btS = bt.substring(2,bt.length());   // extraigo los caracteres desde la poisicion 2 en adelante ejem:"s1120" a "120"
-           s1Act = btS.toInt();                 //convierto de string a entero
+           s1Act = btS.toInt();                 //convierto de string a entero funcion to int 
            //MUEVO EL SERVOMOTOR CON UN BARRIDO 
            if(s1Ant > s1Act){
               for(int j=s1Ant; j>=s1Act; j--){   
@@ -152,7 +152,7 @@ void loop() {
                   
           s6Ant = s6Act;} 
 
-        //////////////////////////// SERVO 7 - GRIPPER //////////arduino sensor shield v5.0 uso///////////////////////////////////////////////////////////////////////
+        //////////////////////////// SERVO 7 - GRIPPER-garra-pinza //////////arduino sensor shield v5.0 uso///////////////////////////////////////////////////////////////////////
         if(bt.startsWith("s7")){                
            btS = bt.substring(2,bt.length());   
            s7Act = btS.toInt();                 
